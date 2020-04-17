@@ -10,18 +10,20 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var faveCatalog: FaveCatalogViewModel
+    @State private var title: String = "Favourite Things"
+    @Environment(\.editMode) var mode
+    
     var body: some View {
         NavigationView {
-            MasterView(faveCatalog: faveCatalog)
-            .navigationBarTitle("Favorite Things")
+            MasterView(faveCatalog: faveCatalog, title: $title)
             .navigationBarItems(
-                leading: EditButton(),
-                trailing: Button (
+                leading: Button (
                     action: {
                         withAnimation {
-                            self.faveCatalog.add(TankClass(url:nil,name:"",sub:"",field1name: "", field1desc: "",field2name: "",field2desc: "",field3name: "", field3desc: "",notes: ""))
+                            self.faveCatalog.add(TankClass(url:nil,name:"",sub:"",fieldNameArray: ["","",""], fieldDescArray: ["","",""], notes: ""))
                         }
-                })  { Image(systemName: "plus") }
+                })  { Image(systemName: "plus") },
+                trailing: EditButton()
             )
         }.navigationViewStyle(StackNavigationViewStyle())
     }
