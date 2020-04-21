@@ -12,17 +12,19 @@ struct DetailView: View {
     @ObservedObject public var fave: TankClass
     @State var tempURL: String = ""
     @Environment(\.editMode) var mode
+            
     var body: some View {
         ScrollView(.vertical) {
             VStack() {
                 fave.image
 
-                if mode?.wrappedValue == .active || self.fave.url == nil {
+                //if mode?.wrappedValue == .active || self.fave.url == nil {
                     TextField("Enter image URL", text: $tempURL, onCommit: {
                         self.fave.url = self.tempURL
                     }).textFieldStyle(RoundedBorderTextFieldStyle())
                         .frame(width:UIScreen.main.bounds.width-25)
-                }
+                //}
+                
                 TextField("Name", text: $fave.name)
                     .font(.largeTitle)
                     .multilineTextAlignment(.center)
@@ -40,7 +42,7 @@ struct DetailView: View {
                         TextField("Field Name:", text: self.$fave.fieldNameArray[item])
                         TextField("Field Desc", text: self.$fave.fieldDescArray[item])
                     }
-                }
+                }.onDelete { indices in self.fave.remove(indices) }
                 if mode?.wrappedValue == .active {
                     Button(
                         action: {

@@ -12,6 +12,7 @@ struct ContentView: View {
     @ObservedObject var faveCatalog: FaveCatalogViewModel
     @State private var title: String = "Favourite Things"
     @Environment(\.editMode) var mode
+    @Environment(\.managedObjectContext) var viewContext
     
     var body: some View {
         NavigationView {

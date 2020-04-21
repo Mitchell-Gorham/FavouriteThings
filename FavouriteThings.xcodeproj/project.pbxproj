@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE169CF5244E94C300BB0319 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE169CF4244E94C300BB0319 /* Event.swift */; };
+		FE169CF8244E979100BB0319 /* FavouriteThingsCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE169CF6244E979100BB0319 /* FavouriteThingsCoreData.xcdatamodeld */; };
 		FED44ACB2447F8C8006A9DC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED44ACA2447F8C8006A9DC8 /* AppDelegate.swift */; };
 		FED44ACD2447F8C8006A9DC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED44ACC2447F8C8006A9DC8 /* SceneDelegate.swift */; };
 		FED44ACF2447F8C8006A9DC8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED44ACE2447F8C8006A9DC8 /* ContentView.swift */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE169CF4244E94C300BB0319 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		FE169CF7244E979100BB0319 /* FavouriteThings.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouriteThings.xcdatamodel; sourceTree = "<group>"; };
 		FED44AC72447F8C8006A9DC8 /* FavouriteThings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FavouriteThings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FED44ACA2447F8C8006A9DC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FED44ACC2447F8C8006A9DC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 				FED44B0424481023006A9DC8 /* FavouriteViewModel.swift */,
 				FED44B0024480110006A9DC8 /* ImageDownload.swift */,
 				FED44AD52447F8C9006A9DC8 /* LaunchScreen.storyboard */,
+				FE169CF4244E94C300BB0319 /* Event.swift */,
+				FE169CF6244E979100BB0319 /* FavouriteThingsCoreData.xcdatamodeld */,
 				FED44AD82447F8C9006A9DC8 /* Info.plist */,
 				FED44AD02447F8C9006A9DC8 /* Assets.xcassets */,
 				FED44AD22447F8C9006A9DC8 /* Preview Content */,
@@ -288,7 +294,9 @@
 				FED44ACB2447F8C8006A9DC8 /* AppDelegate.swift in Sources */,
 				FED44AFF24480048006A9DC8 /* DetailView.swift in Sources */,
 				FED44B032448100A006A9DC8 /* FavouriteClass.swift in Sources */,
+				FE169CF8244E979100BB0319 /* FavouriteThingsCoreData.xcdatamodeld in Sources */,
 				FED44AFD24480015006A9DC8 /* RowView.swift in Sources */,
+				FE169CF5244E94C300BB0319 /* Event.swift in Sources */,
 				FED44B0124480110006A9DC8 /* ImageDownload.swift in Sources */,
 				FED44B0524481023006A9DC8 /* FavouriteViewModel.swift in Sources */,
 				FED44ACD2447F8C8006A9DC8 /* SceneDelegate.swift in Sources */,
@@ -612,6 +620,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FE169CF6244E979100BB0319 /* FavouriteThingsCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FE169CF7244E979100BB0319 /* FavouriteThings.xcdatamodel */,
+			);
+			currentVersion = FE169CF7244E979100BB0319 /* FavouriteThings.xcdatamodel */;
+			path = FavouriteThingsCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FED44ABF2447F8C8006A9DC8 /* Project object */;
 }

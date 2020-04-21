@@ -9,9 +9,11 @@
 import Foundation
 
 class FaveCatalogViewModel: ObservableObject, Identifiable {
+    @Published var title: String
     @Published var array: [TankClass]   //  Contains an array of classes of type TankClass
     
     init() {
+        title = String()
         array = [TankClass]()
     }
     
