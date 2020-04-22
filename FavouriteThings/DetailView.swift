@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct DetailView: View {
-    @ObservedObject public var fave: TankClass
+    @ObservedObject public var fave: FaveClass
     @State var tempURL: String = ""
     @Environment(\.editMode) var mode
             
@@ -66,7 +66,7 @@ struct DetailView: View {
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView(
-            fave: TankClass(url: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", name: "Google", sub: "Google Search", fieldNameArray: ["Origin"], fieldDescArray: ["Web"] , notes: "Notes with Info")
+            fave: FaveClass(url: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", name: "Google", sub: "Google Search", fieldNameArray: ["Origin"], fieldDescArray: ["Web"] , notes: "Notes with Info")
         )
     }
 }

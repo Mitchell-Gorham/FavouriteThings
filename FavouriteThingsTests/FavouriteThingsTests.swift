@@ -19,10 +19,28 @@ class FavouriteThingsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testFaveClass() throws {
+        let url = "url"
+        let name = "name"
+        let sub = "sub"
+        let nameArray = ["n1","n2","n3"]
+        let descArray = ["d1","d2","d3"]
+        let notes = "testnote"
+        
+        let testClass = FaveClass(url: url, name: name, sub:sub, fieldNameArray: nameArray, fieldDescArray: descArray, notes: notes)
+
+        XCTAssertEqual(testClass.url, url)
+        XCTAssertEqual(testClass.name, name)
+        XCTAssertEqual(testClass.fieldNameArray, nameArray)
+        XCTAssertEqual(testClass.fieldDescArray, descArray)
+        XCTAssertEqual(testClass.notes, notes)
     }
+    
+    func testFaveViewModel() throws {
+        
+    }
+    
+    func 
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

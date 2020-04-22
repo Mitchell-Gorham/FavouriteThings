@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct RowView: View {
-    @ObservedObject var faveRow: TankClass
+    @ObservedObject var faveRow: FaveClass
     var body: some View {
         //  Each row consists of an image, name and constellation text
         HStack() {
@@ -32,7 +32,7 @@ struct RowView: View {
 struct RowView_Previews: PreviewProvider {
     static var previews: some View {
         RowView(
-            faveRow: TankClass(url: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", name: "Google", sub: "Google Search", fieldNameArray: ["Origin"], fieldDescArray: ["Web"], notes: "Notes with Info")
+            faveRow: FaveClass(url: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", name: "Google", sub: "Google Search", fieldNameArray: ["Origin"], fieldDescArray: ["Web"], notes: "Notes with Info")
         )
     }
 }

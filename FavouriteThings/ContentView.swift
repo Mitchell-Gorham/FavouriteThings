@@ -20,7 +20,7 @@ struct ContentView: View {
                 leading: Button (
                     action: {
                         withAnimation {
-                            self.faveCatalog.add(TankClass(url:"noImage",name:"",sub:"",fieldNameArray: ["","",""], fieldDescArray: ["","",""], notes: ""))
+                            self.faveCatalog.add(FaveClass(url:"defaultImage",name:"",sub:"",fieldNameArray: ["","",""], fieldDescArray: ["","",""], notes: ""))
                         }
                 })  { Image(systemName: "plus") },
                 trailing: EditButton()

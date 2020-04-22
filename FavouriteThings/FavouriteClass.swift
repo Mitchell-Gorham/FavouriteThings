@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-class TankClass: ObservableObject, Identifiable, Codable {
+class FaveClass: ObservableObject, Identifiable, Codable {
     @Published var url: String?
     var image: Image {
         if let u = url {
