@@ -14,7 +14,7 @@ class TankClass: ObservableObject, Identifiable, Codable {
         if let u = url {
         return imageDownload(u)
         } else {
-            return Image("null")
+            return Image("noImage")
         }
     }
     

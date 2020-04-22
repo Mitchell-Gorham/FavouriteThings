@@ -25,13 +25,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Get the managed object context from the shared persistent container
         //let delegate = UIApplication.shared.delegate as! AppDelegate
         //let context = delegate.persistentContainer.viewContext
+        
         do {
+            print("LOADING LOADING LOADING")
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let documentFolderURL = urls.first!
             let fileURL = documentFolderURL.appendingPathComponent(dataFileName)
             let data = try Data(contentsOf: fileURL)
             let decoder = JSONDecoder()
-            //faveArray = try decoder.decode(TankClass.self, from: data)
+            faveArray = try decoder.decode(FaveCatalogViewModel.self, from: data)
         } catch {
             print("Loading got \(error).")
         }
@@ -48,16 +50,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
+        print("DISCONNECTED DISCONNECTED DISCONNECTED")
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
-        do{
+        do {
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let documentFolderURL = urls.first!
             let fileURL = documentFolderURL.appendingPathComponent(dataFileName)
             let json = JSONEncoder()
-            //let data = try json.encode(faveArray)
+            let data = try json.encode(faveArray)
+            try data.write(to: fileURL)
+            print(data)
         } catch {
             print("Saving got \(error).")
         }

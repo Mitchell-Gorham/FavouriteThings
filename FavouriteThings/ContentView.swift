@@ -10,18 +10,17 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var faveCatalog: FaveCatalogViewModel
-    @State private var title: String = "Favourite Things"
     @Environment(\.editMode) var mode
     @Environment(\.managedObjectContext) var viewContext
     
     var body: some View {
         NavigationView {
-            MasterView(faveCatalog: faveCatalog, title: $title)
+            MasterView(faveCatalog: faveCatalog)
             .navigationBarItems(
                 leading: Button (
                     action: {
                         withAnimation {
-                            self.faveCatalog.add(TankClass(url:nil,name:"",sub:"",fieldNameArray: ["","",""], fieldDescArray: ["","",""], notes: ""))
+                            self.faveCatalog.add(TankClass(url:"noImage",name:"",sub:"",fieldNameArray: ["","",""], fieldDescArray: ["","",""], notes: ""))
                         }
                 })  { Image(systemName: "plus") },
                 trailing: EditButton()

@@ -10,7 +10,6 @@ import SwiftUI
 
 struct MasterView: View {
     @ObservedObject var faveCatalog: FaveCatalogViewModel
-    @Binding var title: String
     @Environment(\.editMode) var mode
     
     var body: some View {
@@ -18,7 +17,7 @@ struct MasterView: View {
             if mode?.wrappedValue == .active {
                 HStack {
                     Text("✎").font(Font.system(.largeTitle).bold())
-                    TextField("Enter Title", text: $title).font(Font.system(.largeTitle).bold())
+                    TextField("Enter Title", text: $faveCatalog.title).font(Font.system(.largeTitle).bold())
                 }
             }
             List {
@@ -31,6 +30,6 @@ struct MasterView: View {
                     self.faveCatalog.array.move(fromOffsets: indices, toOffset: destination)
                 }
             }
-        }.navigationBarTitle(mode?.wrappedValue == .active ? "" : title)
+        }.navigationBarTitle(mode?.wrappedValue == .active ? "" : faveCatalog.title)
     }
 }
