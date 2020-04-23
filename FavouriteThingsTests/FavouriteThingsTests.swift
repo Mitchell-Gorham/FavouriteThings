@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftUI
 @testable import FavouriteThings
 
 class FavouriteThingsTests: XCTestCase {
@@ -37,11 +38,30 @@ class FavouriteThingsTests: XCTestCase {
     }
     
     func testFaveViewModel() throws {
-        
+        let testClass = FaveClass(url: "noImage", name: "name", sub: "sub", fieldNameArray: ["n1","n2","n3"], fieldDescArray: ["d1","d2","d3"], notes: "notes")
+        let testCatalog = FaveCatalogViewModel()
+        testCatalog.add(testClass)
+        XCTAssertEqual(testCatalog.array.count, 1)
+        testCatalog.remove([0])
+        XCTAssertEqual(testCatalog.array.count, 0)
+    }
+
+    func testImageDownload() throws {
+        guard let imageURL = URL(string: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png") else {
+            return XCTFail("Invalid URL")
+        }
+        // Attempt to convert the url into data returning a default image if it fails
+        guard let imageData = try? Data(contentsOf: imageURL) else {
+            return XCTFail("Can't convert url to data")
+        }
+        // Attempts to convert the data into a UIImage returning a, you guessed it, default image if it fails.
+        guard let uiImage = UIImage(data: imageData) else {
+            return XCTFail("Can't convert data into an image")
+        }
+        let downloadedImage = Image(uiImage: uiImage)
+        XCTAssertNotNil(downloadedImage)
     }
     
-    func 
-
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
