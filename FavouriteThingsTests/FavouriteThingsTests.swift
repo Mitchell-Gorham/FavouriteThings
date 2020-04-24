@@ -41,9 +41,9 @@ class FavouriteThingsTests: XCTestCase {
         let testClass = FaveClass(url: "noImage", name: "name", sub: "sub", fieldNameArray: ["n1","n2","n3"], fieldDescArray: ["d1","d2","d3"], notes: "notes")
         let testCatalog = FaveCatalogViewModel()
         testCatalog.add(testClass)
-        XCTAssertEqual(testCatalog.array.count, 1)
-        testCatalog.remove([0])
-        XCTAssertEqual(testCatalog.array.count, 0)
+        XCTAssertEqual(testCatalog.array.count, 4)
+        testCatalog.remove([3])
+        XCTAssertEqual(testCatalog.array.count, 3)
     }
 
     func testImageDownload() throws {

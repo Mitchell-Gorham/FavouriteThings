@@ -9,8 +9,8 @@
 import Foundation
 
 class FaveCatalogViewModel: ObservableObject, Identifiable, Codable {
-    @Published var title: String
-    @Published var array: [FaveClass]   //  Contains an array of classes of type TankClass
+    @Published var title: String        // 
+    @Published var array: [FaveClass]   // Contains an array of classes of type FaveClass
     
     enum CodingKeys : String, CodingKey {
         case title
