@@ -11,7 +11,6 @@ import SwiftUI
 struct MasterView: View {
     @ObservedObject var faveCatalog: FaveCatalogViewModel
     @Environment(\.editMode) var mode
-    
     var body: some View {
         VStack {
             if mode?.wrappedValue == .active {

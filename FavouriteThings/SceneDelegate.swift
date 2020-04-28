@@ -23,9 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Get the managed object context from the shared persistent container
-        //let delegate = UIApplication.shared.delegate as! AppDelegate
-        //let context = delegate.persistentContainer.viewContext
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
         
+        //MARK:Codable Loading
         do {
             print("LOADING LOADING LOADING")
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -50,6 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
+        //MARK:Codable Saving
         print("DISCONNECTED DISCONNECTED DISCONNECTED")
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

@@ -37,19 +37,22 @@ struct DetailView: View {
             
             Spacer(minLength: 30)
             VStack{
-                ForEach (0..<fave.fieldNameArray.count, id: \.self) { item in
-                    HStack() {
-                        TextField("Field Name:", text: self.$fave.fieldNameArray[item])
-                        TextField("Field Desc", text: self.$fave.fieldDescArray[item])
+                //List{ //Uncomment when List Works
+                    ForEach (0..<fave.fieldNameArray.count, id: \.self) { item in
+                        //DetailListView(detailList:self.fave, item:item)   //Uncomment when List Works
+                        HStack{ //Comment when List Works
+                            TextField("Field Name:", text: self.$fave.fieldNameArray[item])
+                            TextField("Field Desc", text: self.$fave.fieldDescArray[item])
+                        }   //Comment when List Works
+                    }.onDelete { indices in self.fave.remove(indices) }
+                    if mode?.wrappedValue == .active {
+                        Button(
+                            action: {
+                                self.fave.fieldNameArray.append("")
+                                self.fave.fieldDescArray.append("")
+                        }) { Image(systemName: "text.badge.plus") }
                     }
-                }.onDelete { indices in self.fave.remove(indices) }
-                if mode?.wrappedValue == .active {
-                    Button(
-                        action: {
-                            self.fave.fieldNameArray.append("")
-                            self.fave.fieldDescArray.append("")
-                    }) { Image(systemName: "text.badge.plus") }
-                }
+                //} //Uncomment when List Works
                 Spacer(minLength: 30)
                 //Editable Text Field for Notes
                 Text("Notes:")
@@ -66,7 +69,7 @@ struct DetailView: View {
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView(
-            fave: FaveClass(url: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", name: "Google", sub: "Google Search", fieldNameArray: ["Origin"], fieldDescArray: ["Web"] , notes: "Notes with Info")
+            fave: FaveClass(url: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", name: "Google", sub: "Google Search", fieldNameArray: ["Origin","Lightning"], fieldDescArray: ["Web","Storm"] , notes: "Notes with Info")
         )
     }
 }

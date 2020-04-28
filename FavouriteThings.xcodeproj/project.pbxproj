@@ -23,6 +23,7 @@
 		FED44B0124480110006A9DC8 /* ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED44B0024480110006A9DC8 /* ImageDownload.swift */; };
 		FED44B032448100A006A9DC8 /* FavouriteClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED44B022448100A006A9DC8 /* FavouriteClass.swift */; };
 		FED44B0524481023006A9DC8 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED44B0424481023006A9DC8 /* FavouriteViewModel.swift */; };
+		FEE0D8FB2457CD6600207ADB /* DetailListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE0D8FA2457CD6600207ADB /* DetailListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		FED44B0024480110006A9DC8 /* ImageDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownload.swift; sourceTree = "<group>"; };
 		FED44B022448100A006A9DC8 /* FavouriteClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteClass.swift; sourceTree = "<group>"; };
 		FED44B0424481023006A9DC8 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
+		FEE0D8FA2457CD6600207ADB /* DetailListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				FED44AFA2447FA51006A9DC8 /* MasterView.swift */,
 				FED44AFC24480015006A9DC8 /* RowView.swift */,
 				FED44AFE24480048006A9DC8 /* DetailView.swift */,
+				FEE0D8FA2457CD6600207ADB /* DetailListView.swift */,
 				FED44B022448100A006A9DC8 /* FavouriteClass.swift */,
 				FED44B0424481023006A9DC8 /* FavouriteViewModel.swift */,
 				FED44B0024480110006A9DC8 /* ImageDownload.swift */,
@@ -299,6 +302,7 @@
 				FE169CF5244E94C300BB0319 /* Event.swift in Sources */,
 				FED44B0124480110006A9DC8 /* ImageDownload.swift in Sources */,
 				FED44B0524481023006A9DC8 /* FavouriteViewModel.swift in Sources */,
+				FEE0D8FB2457CD6600207ADB /* DetailListView.swift in Sources */,
 				FED44ACD2447F8C8006A9DC8 /* SceneDelegate.swift in Sources */,
 				FED44AFB2447FA51006A9DC8 /* MasterView.swift in Sources */,
 				FED44ACF2447F8C8006A9DC8 /* ContentView.swift in Sources */,

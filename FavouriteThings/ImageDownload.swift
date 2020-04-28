@@ -11,7 +11,10 @@ import SwiftUI
 // Takes the received string and attempts to convert it into an image, should it fail to do so, a default image is provided
 
 func imageDownload (_ input: String) -> Image {
-    
+    print(input)
+    if input == "noImage" {
+        return (Image("noImage"))
+    }
     // Attempt to convert the URL string into a URL returning a default image if it fails
     guard let imageURL = URL(string: input) else {
         print ("Invalid URL")
