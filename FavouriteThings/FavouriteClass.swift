@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-class FaveClass: ObservableObject, Identifiable, Codable {
+class oldFaveClass: ObservableObject, Identifiable, Codable {
     @Published var url: String?
     var image: Image {
         if let u = url {

@@ -13,33 +13,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    var faveArray: FaveCatalogViewModel = FaveCatalogViewModel()
+//    var faveArray: FaveCatalogViewModel = FaveCatalogViewModel()
     
-    var dataFileName = "FavouriteThingsData.txt"
+//    var dataFileName = "FavouriteThingsData.txt"
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
+
+        
+        //MARK:Codable Loading
+//        do {
+//            print("LOADING LOADING LOADING")
+//            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//            let documentFolderURL = urls.first!
+//            let fileURL = documentFolderURL.appendingPathComponent(dataFileName)
+//            let data = try Data(contentsOf: fileURL)
+//            let decoder = JSONDecoder()
+//            faveArray = try decoder.decode(FaveCatalogViewModel.self, from: data)
+//        } catch {
+//            print("Loading got \(error).")
+//        }
+        
         // Get the managed object context from the shared persistent container
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
-        
-        //MARK:Codable Loading
-        do {
-            print("LOADING LOADING LOADING")
-            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            let documentFolderURL = urls.first!
-            let fileURL = documentFolderURL.appendingPathComponent(dataFileName)
-            let data = try Data(contentsOf: fileURL)
-            let decoder = JSONDecoder()
-            faveArray = try decoder.decode(FaveCatalogViewModel.self, from: data)
-        } catch {
-            print("Loading got \(error).")
-        }
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView(faveCatalog: faveArray)//.environment(\.managedObjectContext,context)
+        let contentView = ContentView().environment(\.managedObjectContext,context)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -52,22 +54,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidDisconnect(_ scene: UIScene) {
         //MARK:Codable Saving
-        print("DISCONNECTED DISCONNECTED DISCONNECTED")
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
-        do {
-            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            let documentFolderURL = urls.first!
-            let fileURL = documentFolderURL.appendingPathComponent(dataFileName)
-            let json = JSONEncoder()
-            let data = try json.encode(faveArray)
-            try data.write(to: fileURL)
-            print(data)
-        } catch {
-            print("Saving got \(error).")
-        }
+//          print("DISCONNECTED DISCONNECTED DISCONNECTED")
+//        do {
+//            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//            let documentFolderURL = urls.first!
+//            let fileURL = documentFolderURL.appendingPathComponent(dataFileName)
+//            let json = JSONEncoder()
+//            let data = try json.encode(faveArray)
+//            try data.write(to: fileURL)
+//            print(data)
+//        } catch {
+//            print("Saving got \(error).")
+//        }
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -89,6 +91,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError()
+        }
+        delegate.saveContext()
+        
     }
 
 

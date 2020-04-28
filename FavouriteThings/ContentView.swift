@@ -7,20 +7,24 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
-    @ObservedObject var faveCatalog: FaveCatalogViewModel
+    //@ObservedObject var faveCatalog: FaveCatalogViewModel
     @Environment(\.editMode) var mode
-    @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \FaveViewModel.name, ascending: true)], animation: .default) var faveCatalog: FetchedResults<FaveViewModel>
     
     var body: some View {
         NavigationView {
-            MasterView(faveCatalog: faveCatalog)
+            MasterView(faveCatalog: faveCatalog.first ?? FaveViewModel(context: context))
             .navigationBarItems(
                 leading: Button (
                     action: {
                         withAnimation {
-                            self.faveCatalog.add(FaveClass(url:"defaultImage",name:"",sub:"",fieldNameArray: ["","",""], fieldDescArray: ["","",""], notes: ""))
+                            let newClass = FaveClass(context: self.context)
+                            newClass.viewModel = self.faveCatalog.first
+                            try? self.context.save()
                         }
                 })  { Image(systemName: "plus") },
                 trailing: EditButton()
