@@ -10,20 +10,16 @@ import UIKit
 import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \FaveViewModel.name, ascending: true)], animation: .default) var dataFaveViewModel: FetchedResults<FaveViewModel>
 
     var window: UIWindow?
-    
-//    var faveArray: FaveCatalogViewModel = FaveCatalogViewModel()
-    
-//    var dataFileName = "FavouriteThingsData.txt"
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-
-
-        
+   
         //MARK:Codable Loading
 //        do {
 //            print("LOADING LOADING LOADING")
@@ -42,7 +38,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let context = delegate.persistentContainer.viewContext
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView().environment(\.managedObjectContext,context)
-
+        /*
+        let faveCatalog = dataFaveViewModel.first ?? FaveViewModel(context: context)
+        let newClass = FaveClass(context: self.context)
+        newClass.viewModel = faveCatalog
+        newClass.url = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/T-10_tank.jpg/640px-T-10_tank.jpg"
+        newClass.name = "T-10"
+        newClass.sub =  "Object-730"
+        //newClass.nameArray = ["Type:","Place of Origin:","In Service:"]
+        //newClass.descArray = ["Heavy Tank","Soviet Russia","1953-1996"]
+        newClass.notes = "The T-10 was never exported outside of the Soviet Union."
+        */
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

@@ -8,13 +8,14 @@
 
 import SwiftUI
 
-/*struct DetailListView: View {
-    @ObservedObject var detailList: FaveClass
+struct DetailListView: View {
+    @ObservedObject var faveList : FaveClass
     var item: Int
     var body: some View {
         HStack() {
-            TextField("Field Name:", text: self.$detailList.nameArray[item].nameString)
-            TextField("Field Desc", text: self.$detailList.descArray[item].descString)
+            TextField("Field Name \(item+1):", text: $faveList.nameArray[item].nameBind)
+            TextField("Field Desc \(item+1)", text: $faveList.descArray[item].descBind)
         }
     }
-}*/
+}
+

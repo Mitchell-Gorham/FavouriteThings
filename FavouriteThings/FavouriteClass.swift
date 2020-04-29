@@ -6,6 +6,8 @@
 //  Copyright © 2020 Mitchell Gorham. All rights reserved.
 //
 
+/* MARK:Now Replaced with Core Data
+
 import SwiftUI
 
 class oldFaveClass: ObservableObject, Identifiable, Codable {
@@ -66,3 +68,4 @@ class oldFaveClass: ObservableObject, Identifiable, Codable {
         self.fieldDescArray.remove(atOffsets: indices)
     }
 }
+*/

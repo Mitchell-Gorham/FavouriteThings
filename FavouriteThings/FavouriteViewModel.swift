@@ -6,6 +6,8 @@
 //  Copyright © 2020 Mitchell Gorham. All rights reserved.
 //
 
+/* MARK:Now Replaced with Core Data
+ 
 import Foundation
 
 class FaveCatalogViewModel: ObservableObject, Identifiable, Codable {
@@ -42,3 +44,4 @@ class FaveCatalogViewModel: ObservableObject, Identifiable, Codable {
         self.array.remove(atOffsets: indices)
     }
 }
+*/

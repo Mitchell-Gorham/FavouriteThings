@@ -32,7 +32,7 @@ struct DetailView: View {
                     .font(.largeTitle)
                     .multilineTextAlignment(.center)
                     .frame(width:UIScreen.main.bounds.width-25)
-                TextField("sub", text: $fave.subString)
+                TextField("Subtitle", text: $fave.subString)
                     .multilineTextAlignment(.center)
                     .frame(width:UIScreen.main.bounds.width-25)
                     .foregroundColor(.gray)
@@ -40,29 +40,34 @@ struct DetailView: View {
             
             Spacer(minLength: 30)
             VStack{
-//                List{ //Uncomment when List Works
-//                    ForEach (0..<fave.nameArray.count, id: \.self) { item in
-//                        DetailListView(detailList:self.fave, item:item)   //Uncomment when List Works
-//                        HStack{ //Comment when List Works
-//                            TextField("Field Name:", text: self.$fave.fieldNameArray.name[item])
-//                            TextField("Field Desc", text: self.$fave.fieldDescArray[item].desc)
-//                        }   //Comment when List Works
-//                    }.onDelete { indices in
-//                        self.fave.removeFromFieldNameArray(at: indices as NSIndexSet)
-//                        self.fave.removeFromFieldDescArray(at: indices as NSIndexSet)
-//                        try? self.context.save()
-//                    }
-                    if mode?.wrappedValue == .active {
-                        Button(
-                            action: {
-                                /*let newName = FieldNameArray(context: self.context)
-                                newName.parentClass = self.fave.first
-                                let newDesc = FieldDescArray(context: self.context)
-                                newDesc.parentClass = self.fave.first
-                                try? self.context.save()*/
-                        }) { Image(systemName: "text.badge.plus") }
-                    }
-//                } //Uncomment when List Works
+                   ScrollView(.vertical){
+                        ForEach (0..<fave.nameArray.count, id: \.self) { item in
+                            DetailListView(faveList: self.fave, item: item)
+                        }.onDelete { indices in
+                            self.fave.removeFromFieldNameArray(at: indices as NSIndexSet)
+                            self.fave.removeFromFieldDescArray(at: indices as NSIndexSet)
+                            try? self.context.save()
+                        }.onMove { (indices, destination) in
+                            self.fave.nameArray.move(fromOffsets: indices, toOffset: destination)
+                            self.fave.descArray.move(fromOffsets: indices, toOffset: destination)
+                            try? self.context.save()
+                        }
+                    }.frame(minWidth:UIScreen.main.bounds.width-25,
+                    maxWidth:UIScreen.main.bounds.width-25,
+                    minHeight:0,
+                    maxHeight:UIScreen.main.bounds.height/6)
+                
+//                if mode?.wrappedValue == .active {
+                    Button(
+                        action: {
+                            let newName = FieldNameArray(context: self.context)
+                            newName.parentClass = self.fave
+                            let newDesc = FieldDescArray(context: self.context)
+                            newDesc.parentClass = self.fave
+                            try? self.context.save()
+                        }
+                    ) { Image(systemName: "text.badge.plus") }
+//                }
                 Spacer(minLength: 30)
                 //Editable Text Field for Notes
                 Text("Notes:")
@@ -72,6 +77,7 @@ struct DetailView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width:UIScreen.main.bounds.width-25)
             }.frame(width:UIScreen.main.bounds.width-25)
+            
         }.frame(width:UIScreen.main.bounds.width-25)
     }
 }
