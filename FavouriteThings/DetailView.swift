@@ -21,18 +21,15 @@ struct DetailView: View {
         ScrollView(.vertical) {
             VStack() {
                 imageDownload(fave.url ?? "noImage")
-                //if mode?.wrappedValue == .active || self.fave.url == nil {
-                    TextField("Enter image URL", text: $tempURL, onCommit: {
-                        self.fave.url = self.tempURL
-                    }).textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(width:UIScreen.main.bounds.width-25)
-                //}
-                
-                TextField("Name", text: $fave.nameString)
+                TextField("Enter URL", text: $tempURL, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
+                    self.fave.url = self.tempURL
+                }).textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(width:UIScreen.main.bounds.width-25)
+                TextField("Name", text: $fave.nameString, onEditingChanged: { _ in try? self.context.save() } )
                     .font(.largeTitle)
                     .multilineTextAlignment(.center)
                     .frame(width:UIScreen.main.bounds.width-25)
-                TextField("Subtitle", text: $fave.subString)
+                TextField("Subtitle", text: $fave.subString, onEditingChanged: { _ in try? self.context.save() } )
                     .multilineTextAlignment(.center)
                     .frame(width:UIScreen.main.bounds.width-25)
                     .foregroundColor(.gray)
@@ -40,40 +37,41 @@ struct DetailView: View {
             
             Spacer(minLength: 30)
             VStack{
-                   ScrollView(.vertical){
-                        ForEach (0..<fave.nameArray.count, id: \.self) { item in
-                            DetailListView(faveList: self.fave, item: item)
-                        }.onDelete { indices in
-                            self.fave.removeFromFieldNameArray(at: indices as NSIndexSet)
-                            self.fave.removeFromFieldDescArray(at: indices as NSIndexSet)
-                            try? self.context.save()
-                        }.onMove { (indices, destination) in
-                            self.fave.nameArray.move(fromOffsets: indices, toOffset: destination)
-                            self.fave.descArray.move(fromOffsets: indices, toOffset: destination)
-                            try? self.context.save()
-                        }
-                    }.frame(minWidth:UIScreen.main.bounds.width-25,
-                    maxWidth:UIScreen.main.bounds.width-25,
-                    minHeight:0,
-                    maxHeight:UIScreen.main.bounds.height/6)
-                
-//                if mode?.wrappedValue == .active {
+               ScrollView(.vertical){
+                    ForEach (0..<fave.nameArray.count, id: \.self) { item in
+                        DetailListView(faveList: self.fave, item: item)
+                    }
+                }.frame(minWidth:UIScreen.main.bounds.width-25,
+                maxWidth:UIScreen.main.bounds.width-25,
+                minHeight:0,
+                maxHeight:UIScreen.main.bounds.height/6)
+                HStack {
                     Button(
                         action: {
                             let newName = FieldNameArray(context: self.context)
-                            newName.parentClass = self.fave
                             let newDesc = FieldDescArray(context: self.context)
+                            newName.parentClass = self.fave
                             newDesc.parentClass = self.fave
                             try? self.context.save()
                         }
                     ) { Image(systemName: "text.badge.plus") }
-//                }
+                    Button(
+                       action: {
+                            if self.fave.nameArray.count > 0 {
+//MARK: Find out how to remove
+                                //self.fave.nameArray.removeLast()
+                                //self.fave.descArray.removeLast()
+                                try? self.context.save()
+                            }
+                       }
+                    ) { Image(systemName: "text.badge.minus").foregroundColor(.red) }
+                }
                 Spacer(minLength: 30)
                 //Editable Text Field for Notes
                 Text("Notes:")
                     .font(.headline)
                     .multilineTextAlignment(.center)
-                TextField("Add some notes here", text: $fave.notesString)
+                TextField("Add some notes here", text: $fave.notesString, onEditingChanged: { _ in try? self.context.save() } )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width:UIScreen.main.bounds.width-25)
             }.frame(width:UIScreen.main.bounds.width-25)

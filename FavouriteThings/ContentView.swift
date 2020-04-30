@@ -10,9 +10,8 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.editMode) var mode
     @Environment(\.managedObjectContext) var context
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \FaveViewModel.name, ascending: true)], animation: .default) var faveCatalog: FetchedResults<FaveViewModel>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \FaveViewModel.title, ascending: true)], animation: .default) var faveCatalog: FetchedResults<FaveViewModel>
     
     var body: some View {
         NavigationView {

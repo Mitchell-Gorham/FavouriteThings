@@ -10,7 +10,6 @@
         <relationship name="viewModel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FaveViewModel" inverseName="faveClasses" inverseEntity="FaveViewModel"/>
     </entity>
     <entity name="FaveViewModel" representedClassName="FaveViewModel" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String" defaultValueString="Favourite Things"/>
         <relationship name="faveClasses" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="FaveClass" inverseName="viewModel" inverseEntity="FaveClass"/>
     </entity>
@@ -24,7 +23,7 @@
     </entity>
     <elements>
         <element name="FaveClass" positionX="-38.59765625" positionY="-154.3671875" width="128" height="148"/>
-        <element name="FaveViewModel" positionX="-287.32421875" positionY="-94.2265625" width="128" height="88"/>
+        <element name="FaveViewModel" positionX="-291.03125" positionY="-79.4296875" width="128" height="73"/>
         <element name="FieldDescArray" positionX="265.1015625" positionY="-138.88671875" width="128" height="73"/>
         <element name="FieldNameArray" positionX="265.4375" positionY="-63.13671875" width="128" height="73"/>
     </elements>

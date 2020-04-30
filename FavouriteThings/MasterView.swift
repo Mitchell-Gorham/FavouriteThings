@@ -18,7 +18,8 @@ struct MasterView: View {
             if mode?.wrappedValue == .active {
                 HStack {
                     Text("✎").font(Font.system(.largeTitle).bold())
-                    TextField("Enter Title", text: $faveCatalog.titleString).font(Font.system(.largeTitle).bold())
+                    TextField("Enter Title", text: $faveCatalog.titleString, onEditingChanged: { _ in try? self.context.save() })
+                        .font(Font.system(.largeTitle).bold())
                 }
             }
             List {

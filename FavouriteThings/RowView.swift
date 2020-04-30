@@ -28,12 +28,3 @@ struct RowView: View {
         }
     }
 }
-/*
-struct RowView_Previews: PreviewProvider {
-    static var previews: some View {
-        RowView(
-            faveRow: oldFaveClass(url: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", name: "Google", sub: "Google Search", fieldNameArray: ["Origin"], fieldDescArray: ["Web"], notes: "Notes with Info")
-        )
-    }
-}
-*/

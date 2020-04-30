@@ -8,47 +8,36 @@
 
 import UIKit
 import SwiftUI
+import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
-    @Environment(\.managedObjectContext) var context
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \FaveViewModel.name, ascending: true)], animation: .default) var dataFaveViewModel: FetchedResults<FaveViewModel>
 
     var window: UIWindow?
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-   
-        //MARK:Codable Loading
-//        do {
-//            print("LOADING LOADING LOADING")
-//            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//            let documentFolderURL = urls.first!
-//            let fileURL = documentFolderURL.appendingPathComponent(dataFileName)
-//            let data = try Data(contentsOf: fileURL)
-//            let decoder = JSONDecoder()
-//            faveArray = try decoder.decode(FaveCatalogViewModel.self, from: data)
-//        } catch {
-//            print("Loading got \(error).")
-//        }
+
+//MARK: Initial Data
+/*
+        let faveCatalog = dataFaveViewModel.first ?? FaveViewModel(context: context)
+        if faveCatalog.children.count == 0 {
+            let newClass = FaveClass(context: self.context)
+            newClass.viewModel = dataFaveViewModel.first ?? FaveViewModel(context: context)
+            newClass.url = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/T-10_tank.jpg/640px-T-10_tank.jpg"
+            newClass.name = "T-10"
+            newClass.sub =  "Object-730"
+            //newClass.nameArray = ["Type:","Place of Origin:","In Service:"]
+            //newClass.descArray = ["Heavy Tank","Soviet Russia","1953-1996"]
+            newClass.notes = "The T-10 was never exported outside of the Soviet Union."
+*/
         
         // Get the managed object context from the shared persistent container
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView().environment(\.managedObjectContext,context)
-        /*
-        let faveCatalog = dataFaveViewModel.first ?? FaveViewModel(context: context)
-        let newClass = FaveClass(context: self.context)
-        newClass.viewModel = faveCatalog
-        newClass.url = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/T-10_tank.jpg/640px-T-10_tank.jpg"
-        newClass.name = "T-10"
-        newClass.sub =  "Object-730"
-        //newClass.nameArray = ["Type:","Place of Origin:","In Service:"]
-        //newClass.descArray = ["Heavy Tank","Soviet Russia","1953-1996"]
-        newClass.notes = "The T-10 was never exported outside of the Soviet Union."
-        */
+                
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
@@ -59,23 +48,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
-        //MARK:Codable Saving
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
-//          print("DISCONNECTED DISCONNECTED DISCONNECTED")
-//        do {
-//            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//            let documentFolderURL = urls.first!
-//            let fileURL = documentFolderURL.appendingPathComponent(dataFileName)
-//            let json = JSONEncoder()
-//            let data = try json.encode(faveArray)
-//            try data.write(to: fileURL)
-//            print(data)
-//        } catch {
-//            print("Saving got \(error).")
-//        }
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -103,7 +79,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         delegate.saveContext()
         
     }
-
 
 }
 
