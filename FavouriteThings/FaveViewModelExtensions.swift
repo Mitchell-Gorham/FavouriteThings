@@ -8,7 +8,7 @@
 
 import CoreData
 
-extension FaveViewModel {
+extension FaveViewModel {   //Allows for the pre-existing code for old models to interact with the core data models
     var titleString: String {
         get { title ?? "" }
         set { title = newValue }

@@ -17,24 +17,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-
-//MARK: Initial Data
-/*
-        let faveCatalog = dataFaveViewModel.first ?? FaveViewModel(context: context)
-        if faveCatalog.children.count == 0 {
-            let newClass = FaveClass(context: self.context)
-            newClass.viewModel = dataFaveViewModel.first ?? FaveViewModel(context: context)
-            newClass.url = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/T-10_tank.jpg/640px-T-10_tank.jpg"
-            newClass.name = "T-10"
-            newClass.sub =  "Object-730"
-            //newClass.nameArray = ["Type:","Place of Origin:","In Service:"]
-            //newClass.descArray = ["Heavy Tank","Soviet Russia","1953-1996"]
-            newClass.notes = "The T-10 was never exported outside of the Soviet Union."
-*/
         
-        // Get the managed object context from the shared persistent container
+                // Get the managed object context from the shared persistent container// Get the managed object context from the shared persistent container
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
+        
+        // Initial Data Check and Loading
+        var faveCatalogArray = [FaveViewModel]()
+        let request = NSFetchRequest<FaveViewModel>(entityName: "FaveViewModel")
+        do {
+            faveCatalogArray = try context.fetch(request)   // Assigns existing data to faveCatalogArray
+            if faveCatalogArray.count == 0 {                // If there is no existing FaveViewModels, create one and fetch it again
+                NSEntityDescription.insertNewObject(forEntityName: "FaveViewModel", into: context)
+                faveCatalogArray = try context.fetch(request)
+                
+                //MARK: Initial Data
+                //Populates app with some initial data
+                var newClass = FaveClass(context: context)
+                newClass.viewModel = faveCatalogArray.first
+                newClass.url = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/T-10_tank.jpg/640px-T-10_tank.jpg"
+                newClass.name = "T-10"
+                newClass.sub =  "Object-730"
+                newClass.notes = "The T-10 was never exported outside of the Soviet Union."
+                populateClass(newClass: newClass, context: context, name1:"Type:", name2:"Place of Origin:", name3:"In Service:", desc1:"Heavy Tank",desc2:"Soviet Union",desc3:"1953–1996")
+                
+                newClass = FaveClass(context: context)
+                newClass.viewModel = faveCatalogArray.first
+                newClass.url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Leopard1_cfb_borden_2.JPG/640px-Leopard1_cfb_borden_2.JPG"
+                newClass.name = "Leopard 1"
+                newClass.sub = "Leopard 1A4"
+                newClass.notes = "In the German Army, the Leopard 1 was completely phased out in 2003 by the Leopard 2, while Leopard 1-based vehicles are still widely used in utility roles."
+                populateClass(newClass: newClass, context: context, name1:"Type:", name2:"Place of Origin:", name3:"In Service:", desc1:"Main Battle Tank",desc2:"West Germany",desc3:"1965-Present")
+                
+                newClass = FaveClass(context: context)
+                newClass.viewModel = faveCatalogArray.first
+                newClass.url = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/M4_Sherman_tank_-_Flickr_-_Joost_J._Bakker_IJmuiden.jpg/640px-M4_Sherman_tank_-_Flickr_-_Joost_J._Bakker_IJmuiden.jpg"
+                newClass.name = "M4 Sherman"
+                newClass.sub = "Medium Tank, M4"
+                newClass.notes = "Tens of thousands were distributed through the Lend-Lease program to the British Commonwealth and Soviet Union."
+                populateClass(newClass: newClass, context: context, name1:"Type:", name2:"Place of Origin:", name3:"In Service:", desc1:"Medium Tank",desc2:"United States",desc3:"1942-1957")
+                try? context.save()
+            }
+        } catch {
+            print("ERROR - COULD NOT FIND DATA")
+        }
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView().environment(\.managedObjectContext,context)
                 
@@ -74,7 +100,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError()
+            return(print("Error: delegate was unable to be assigned"))
         }
         delegate.saveContext()
         

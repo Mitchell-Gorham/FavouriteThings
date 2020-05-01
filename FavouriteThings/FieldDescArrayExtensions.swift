@@ -8,7 +8,7 @@
 
 import CoreData
 
-extension FieldDescArray {
+extension FieldDescArray {  //Allows for the pre-existing code for old models to interact with the core data models
     var descBind: String {
         get { desc ?? "" }
         set { desc = newValue }

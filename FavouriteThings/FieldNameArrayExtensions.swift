@@ -8,7 +8,7 @@
 
 import CoreData
 
-extension FieldNameArray {
+extension FieldNameArray {  //Allows for the pre-existing code for old models to interact with the core data models
     var nameBind: String {
         get { name ?? "" }
         set { name = newValue }

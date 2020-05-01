@@ -19,7 +19,7 @@ class FavouriteThingsTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+/*  No longer used as data model has swapped over to core data
     func testFaveClass() throws {
         let url = "url"
         let name = "name"
@@ -45,7 +45,7 @@ class FavouriteThingsTests: XCTestCase {
         testCatalog.remove([3])
         XCTAssertEqual(testCatalog.array.count, 3)
     }
-
+*/
     func testImageDownload() throws {
         guard let imageURL = URL(string: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png") else {
             return XCTFail("Invalid URL")
