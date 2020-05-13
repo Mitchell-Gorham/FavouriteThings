@@ -17,6 +17,7 @@ struct LocationView: View {
             
     var body: some View {
         VStack {
+            MapView(location: location)
             HStack {
                 Text("Location Name:")
                 TextField("Enter Location Name", text: self.$location.nameBind, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
