@@ -32,19 +32,20 @@ extension FaveClass {   //Allows for the pre-existing code for old models to int
            set { notes = newValue }
     }
     
-    convenience init (url: String, name: String, sub: String, fieldNameArray: NSOrderedSet, fieldDescArray: NSOrderedSet, notes: String) {
+    convenience init (url: String, name: String, sub: String, fieldNameArray: NSOrderedSet, fieldDescArray: NSOrderedSet, location: Location, notes: String) {
         self.init()
         self.url = url
         self.name = name
         self.sub = sub
         self.fieldNameArray = fieldNameArray
         self.fieldDescArray = fieldDescArray
+        self.location = location
         self.notes = notes
     }
 }
 
 // This function is used to populate a FaveClass with supplied data. Used in initial data generation
-func populateClass (newClass: FaveClass, context: NSManagedObjectContext, name1: String,  name2: String, name3: String, desc1: String,desc2: String,desc3: String) {
+func populateClass (newClass: FaveClass, context: NSManagedObjectContext, name1: String, name2: String, name3: String, desc1: String,desc2: String,desc3: String, locName: String, lat: String, long: String) {
     let newName1 = FieldNameArray(context:context)
     let newName2 = FieldNameArray(context:context)
     let newName3 = FieldNameArray(context:context)
@@ -63,4 +64,10 @@ func populateClass (newClass: FaveClass, context: NSManagedObjectContext, name1:
     newDesc2.parentClass = newClass
     newDesc3.desc = desc3
     newDesc3.parentClass = newClass
+    let newLoc = Location(context:context)
+    newLoc.name = locName
+    newLoc.lat = lat
+    newLoc.long = long
+    newLoc.parentClass = newClass
 }
+

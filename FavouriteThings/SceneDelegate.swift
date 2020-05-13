@@ -39,7 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 newClass.name = "T-10"
                 newClass.sub =  "Object-730"
                 newClass.notes = "The T-10 was never exported outside of the Soviet Union."
-                populateClass(newClass: newClass, context: context, name1:"Type:", name2:"Place of Origin:", name3:"In Service:", desc1:"Heavy Tank",desc2:"Soviet Union",desc3:"1953–1996")
+                populateClass(newClass: newClass, context: context, name1:  "Type:", name2: "Place of Origin:", name3: "In Service:", desc1:"Heavy Tank", desc2: "Soviet Union", desc3: "1953–1996", locName: "Moscow", lat: "55.75", long: "37.61")
                 
                 newClass = FaveClass(context: context)
                 newClass.viewModel = faveCatalogArray.first
@@ -47,7 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 newClass.name = "Leopard 1"
                 newClass.sub = "Leopard 1A4"
                 newClass.notes = "In the German Army, the Leopard 1 was completely phased out in 2003 by the Leopard 2, while Leopard 1-based vehicles are still widely used in utility roles."
-                populateClass(newClass: newClass, context: context, name1:"Type:", name2:"Place of Origin:", name3:"In Service:", desc1:"Main Battle Tank",desc2:"West Germany",desc3:"1965-Present")
+                populateClass(newClass: newClass, context: context, name1: "Type:", name2: "Place of Origin:", name3: "In Service:", desc1: "Main Battle Tank", desc2: "West Germany", desc3: "1965-Present", locName: "Berlin", lat: "55.75", long: "37.61")
                 
                 newClass = FaveClass(context: context)
                 newClass.viewModel = faveCatalogArray.first
@@ -55,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 newClass.name = "M4 Sherman"
                 newClass.sub = "Medium Tank, M4"
                 newClass.notes = "Tens of thousands were distributed through the Lend-Lease program to the British Commonwealth and Soviet Union."
-                populateClass(newClass: newClass, context: context, name1:"Type:", name2:"Place of Origin:", name3:"In Service:", desc1:"Medium Tank",desc2:"United States",desc3:"1942-1957")
+                populateClass(newClass: newClass, context: context, name1: "Type:", name2: "Place of Origin:", name3: "In Service:", desc1: "Medium Tank", desc2: "United States", desc3: "1942-1957", locName: "Washington City", lat: "55.75", long: "37.61")
                 try? context.save()
             }
         } catch {

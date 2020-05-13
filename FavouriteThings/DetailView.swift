@@ -9,13 +9,13 @@
 import SwiftUI
 import CoreData
 
-
-
 struct DetailView: View {
     @ObservedObject var fave: FaveClass
     @State var tempURL: String = ""
     @Environment(\.editMode) var mode
     @Environment(\.managedObjectContext) var context
+    
+    @ObservedObject var keyboard = Keyboard()
             
     var body: some View {
         ScrollView(.vertical) {
@@ -33,6 +33,9 @@ struct DetailView: View {
                     .multilineTextAlignment(.center)
                     .frame(width:UIScreen.main.bounds.width-25)
                     .foregroundColor(.gray)
+                NavigationLink(destination: LocationView(location: fave.location!)) {
+                    Text("Location")
+                }
             }
             
             Spacer(minLength: 30)
@@ -42,9 +45,9 @@ struct DetailView: View {
                         DetailListView(faveList: self.fave, item: item)
                     }
                 }.frame(minWidth:UIScreen.main.bounds.width-25,
-                maxWidth:UIScreen.main.bounds.width-25,
-                minHeight:0,
-                maxHeight:UIScreen.main.bounds.height/6)
+                        maxWidth:UIScreen.main.bounds.width-25,
+                        minHeight:0,
+                        maxHeight:UIScreen.main.bounds.height/6)
                 HStack {
                     Button(
                         action: {
@@ -74,6 +77,11 @@ struct DetailView: View {
                 TextField("Add some notes here", text: $fave.notesString, onEditingChanged: { _ in try? self.context.save() } )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width:UIScreen.main.bounds.width-25)
+                GeometryReader { geometry in
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(width: CGFloat(self.keyboard.w), height: CGFloat(self.keyboard.h))
+                }
             }.frame(width:UIScreen.main.bounds.width-25)
             
         }.frame(width:UIScreen.main.bounds.width-25)
