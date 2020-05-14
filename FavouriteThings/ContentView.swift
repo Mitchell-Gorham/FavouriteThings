@@ -21,6 +21,7 @@ struct ContentView: View {
                     action: {
                         withAnimation {
                             let newClass = FaveClass(context: self.context)
+                            populateClass(newClass: newClass, context: self.context, name1: "", name2: "", name3: "", desc1: "", desc2: "", desc3: "", locName: "", lat: "", long: "")
                             newClass.viewModel = self.faveCatalog.first
                             try? self.context.save()
                         }

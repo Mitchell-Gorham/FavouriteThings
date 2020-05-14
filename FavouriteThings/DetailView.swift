@@ -33,22 +33,25 @@ struct DetailView: View {
                     .multilineTextAlignment(.center)
                     .frame(width:UIScreen.main.bounds.width-25)
                     .foregroundColor(.gray)
-                NavigationLink(destination: LocationView(location: fave.location!)) {
-                    Text("Location")
+                HStack {
+                    NavigationLink(destination: LocationView(location: fave.location ?? Location(context: context))) {
+                        Text("Location: \(self.fave.location?.name ?? "")")
+                    }
                 }
             }
             
             Spacer(minLength: 30)
             VStack{
-               ScrollView(.vertical){
+                //ScrollView(.vertical){
                     ForEach (0..<fave.nameArray.count, id: \.self) { item in
                         DetailListView(faveList: self.fave, item: item)
                     }
-                }.frame(minWidth:UIScreen.main.bounds.width-25,
+                /*}.frame(minWidth:UIScreen.main.bounds.width-25,
                         maxWidth:UIScreen.main.bounds.width-25,
-                        minHeight:0,
-                        maxHeight:UIScreen.main.bounds.height/6)
-                HStack {
+                        minHeight:80,
+                        maxHeight:80)*/
+                 /*     Bonus Flair that currently invites issues
+                 HStack {
                     Button(
                         action: {
                             let newName = FieldNameArray(context: self.context)
@@ -62,6 +65,7 @@ struct DetailView: View {
                        action: {
                             if self.fave.nameArray.count > 0 {
 //MARK: Find out how to remove
+//      Items from the array
                                 //self.fave.nameArray.removeLast()
                                 //self.fave.descArray.removeLast()
                                 try? self.context.save()
@@ -69,6 +73,7 @@ struct DetailView: View {
                        }
                     ) { Image(systemName: "text.badge.minus").foregroundColor(.red) }
                 }
+                */
                 Spacer(minLength: 30)
                 //Editable Text Field for Notes
                 Text("Notes:")
@@ -77,14 +82,15 @@ struct DetailView: View {
                 TextField("Add some notes here", text: $fave.notesString, onEditingChanged: { _ in try? self.context.save() } )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width:UIScreen.main.bounds.width-25)
-                GeometryReader { geometry in
-                    Rectangle()
-                        .fill(Color.red)
-                        .frame(width: CGFloat(self.keyboard.w), height: CGFloat(self.keyboard.h))
-                }
+                
+                /*Rectangle()
+                    .fill(Color.red)
+                    .frame(width: CGFloat(self.keyboard.w), height: CGFloat(self.keyboard.h))
+                */
             }.frame(width:UIScreen.main.bounds.width-25)
             
         }.frame(width:UIScreen.main.bounds.width-25)
+         .offset(x:0,y:CGFloat(-keyboard.h))
     }
 }
 

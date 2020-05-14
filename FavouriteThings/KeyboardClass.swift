@@ -26,9 +26,12 @@ class Keyboard: ObservableObject {
     
     @objc func keyboardWillShow(notification: Notification) {
         print("Keyboard Active")
+        guard let rect = notification.userInfo?[UIWindow.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        frame = rect
     }
     
     @objc func keyboardDidHide(notification: Notification) {
         print("Keyboard Hidden")
+        frame = .zero
     }
 }

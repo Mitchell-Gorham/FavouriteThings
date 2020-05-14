@@ -148,6 +148,7 @@
 				FE0084FA246B81880051A73B /* LocationView.swift */,
 				FE63B92C246BB7E100E9D6E4 /* MapView.swift */,
 				FED44B0024480110006A9DC8 /* ImageDownload.swift */,
+				FE63B92A246BB21000E9D6E4 /* KeyboardClass.swift */,
 				FE169CF6244E979100BB0319 /* FavouriteThingsCoreData.xcdatamodeld */,
 				FE31F08224593E2D00C35166 /* FaveViewModelExtensions.swift */,
 				FE31F08424593E9300C35166 /* FaveClassExtensions.swift */,
@@ -160,7 +161,6 @@
 				FED44AD22447F8C9006A9DC8 /* Preview Content */,
 				FED44AD52447F8C9006A9DC8 /* LaunchScreen.storyboard */,
 				FED44AD82447F8C9006A9DC8 /* Info.plist */,
-				FE63B92A246BB21000E9D6E4 /* KeyboardClass.swift */,
 			);
 			path = FavouriteThings;
 			sourceTree = "<group>";

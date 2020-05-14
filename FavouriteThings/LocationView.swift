@@ -12,71 +12,78 @@ import CoreLocation
 
 struct LocationView: View {
     @ObservedObject var location: Location
+    @ObservedObject var keyboard = Keyboard()
     @Environment(\.managedObjectContext) var context
     @State var currentPosition = CLLocationCoordinate2D()
-            
+    
+    
+    
     var body: some View {
-        VStack {
-            MapView(location: location)
-            HStack {
-                Text("Location Name:")
-                TextField("Enter Location Name", text: self.$location.nameBind, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
-                    let geoCoder = CLGeocoder()
-                    let region = CLCircularRegion(center: self.currentPosition, radius: 2_000_000, identifier: "\(self.currentPosition)")
-                    geoCoder.geocodeAddressString(self.location.nameBind, in: region) { (placemarks, error) in
-                        guard let loc = placemarks?.first?.location else {
-                            print("Error location '\(self.location.nameBind)': \(error.map {"\($0)"} ?? "<unknown error>")")
+        //ScrollView(.vertical) {
+            VStack {
+                MapView(location: location)
+                    .frame(width:UIScreen.main.bounds.width,
+                           height: UIScreen.main.bounds.height/3)
+                HStack {
+                    Text("Location Name:")
+                    TextField("Enter Location Name", text: self.$location.nameBind, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
+                        let geoCoder = CLGeocoder()
+                        let region = CLCircularRegion(center: self.currentPosition, radius: 2_000_000, identifier: "\(self.currentPosition)")
+                        geoCoder.geocodeAddressString(self.location.nameBind, in: region) { (placemarks, error) in
+                            guard let loc = placemarks?.first?.location else {
+                                print("Error location '\(self.location.nameBind)': \(error.map {"\($0)"} ?? "<unknown error>")")
+                                return
+                            }
+                            let position = loc.coordinate
+                            self.currentPosition.latitude = position.latitude
+                            self.currentPosition.longitude = position.longitude
+                            self.location.lat = "\(position.latitude)"
+                            self.location.long = "\(position.longitude)"
+                        }
+                        
+                    })
+                }
+                HStack {
+                    Text("Latitude:")
+                    TextField("Location Name", text: self.$location.latBind, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
+                        guard let latitude = CLLocationDegrees(self.location.latBind), let longitude = CLLocationDegrees(self.location.longBind) else {
+                            print("Coordinates Invalid")
                             return
                         }
-                        let position = loc.coordinate
-                        self.currentPosition.latitude = position.latitude
-                        self.currentPosition.longitude = position.longitude
-                        self.location.lat = "\(position.latitude)"
-                        self.location.long = "\(position.longitude)"
-                    }
-                    
-                })
-            }
-            HStack {
-                Text("Latitude:")
-                TextField("Location Name", text: self.$location.latBind, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
-                    guard let latitude = CLLocationDegrees(self.location.latBind), let longitude = CLLocationDegrees(self.location.longBind) else {
-                        print("Coordinates Invalid")
-                        return
-                    }
-                    self.currentPosition.latitude = latitude
-                    self.currentPosition.longitude = longitude
-                    let geoCoder = CLGeocoder()
-                    let pos = CLLocation(latitude: self.currentPosition.latitude, longitude: self.currentPosition.longitude)
-                    geoCoder.reverseGeocodeLocation(pos) { (placemarks, error) in
-                        guard let placemark = placemarks?.first else {
-                            print("Error locating \(self.currentPosition.latitude) / \(self.currentPosition.longitude): \(error.map {"\($0)"} ?? "<unknown error>")")
+                        self.currentPosition.latitude = latitude
+                        self.currentPosition.longitude = longitude
+                        let geoCoder = CLGeocoder()
+                        let pos = CLLocation(latitude: self.currentPosition.latitude, longitude: self.currentPosition.longitude)
+                        geoCoder.reverseGeocodeLocation(pos) { (placemarks, error) in
+                            guard let placemark = placemarks?.first else {
+                                print("Error locating \(self.currentPosition.latitude) / \(self.currentPosition.longitude): \(error.map {"\($0)"} ?? "<unknown error>")")
+                                return
+                            }
+                            self.location.nameBind = placemark.name ?? placemark.locality ?? placemark.subLocality ?? placemark.administrativeArea ?? placemark.country ?? "<unknown>"
+                        }
+                    })
+                }
+                HStack {
+                    Text("Longitude:")
+                    TextField("Location Name", text: self.$location.longBind, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
+                        guard let latitude = CLLocationDegrees(self.location.latBind), let longitude = CLLocationDegrees(self.location.longBind) else {
+                            print("Coordinates Invalid")
                             return
                         }
-                        self.location.nameBind = placemark.name ?? placemark.locality ?? placemark.subLocality ?? placemark.administrativeArea ?? placemark.country ?? "<unknown>"
-                    }
-                })
-            }
-            HStack {
-                Text("Longitude:")
-                TextField("Location Name", text: self.$location.longBind, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
-                    guard let latitude = CLLocationDegrees(self.location.latBind), let longitude = CLLocationDegrees(self.location.longBind) else {
-                        print("Coordinates Invalid")
-                        return
-                    }
-                    self.currentPosition.latitude = latitude
-                    self.currentPosition.longitude = longitude
-                    let geoCoder = CLGeocoder()
-                    let pos = CLLocation(latitude: self.currentPosition.latitude, longitude: self.currentPosition.longitude)
-                    geoCoder.reverseGeocodeLocation(pos) { (placemarks, error) in
-                        guard let placemark = placemarks?.first else {
-                            print("Error locating \(self.currentPosition.latitude) / \(self.currentPosition.longitude): \(error.map {"\($0)"} ?? "<unknown error>")")
-                            return
+                        self.currentPosition.latitude = latitude
+                        self.currentPosition.longitude = longitude
+                        let geoCoder = CLGeocoder()
+                        let pos = CLLocation(latitude: self.currentPosition.latitude, longitude: self.currentPosition.longitude)
+                        geoCoder.reverseGeocodeLocation(pos) { (placemarks, error) in
+                            guard let placemark = placemarks?.first else {
+                                print("Error locating \(self.currentPosition.latitude) / \(self.currentPosition.longitude): \(error.map {"\($0)"} ?? "<unknown error>")")
+                                return
+                            }
+                            self.location.nameBind = placemark.name ?? placemark.locality ?? placemark.subLocality ?? placemark.administrativeArea ?? placemark.country ?? "<unknown>"
                         }
-                        self.location.nameBind = placemark.name ?? placemark.locality ?? placemark.subLocality ?? placemark.administrativeArea ?? placemark.country ?? "<unknown>"
-                    }
-                })
-            }
-        }
+                    })
+                }
+            }.offset(x:0,y:-UIScreen.main.bounds.height/4.2)
+        //}//.offset(x:0,y:CGFloat(-keyboard.h))
     }
 }

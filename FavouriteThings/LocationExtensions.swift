@@ -7,8 +7,9 @@
 //
 
 import CoreData
+import MapKit
 
-extension Location {  //Allows for the pre-existing code for old models to interact with the core data models
+extension Location: MKMapViewDelegate {  //Allows for the pre-existing code for old models to interact with the core data models
     var nameBind: String {
         get { name ?? "" }
         set { name = newValue }
@@ -21,4 +22,12 @@ extension Location {  //Allows for the pre-existing code for old models to inter
         get { long ?? "" }
         set { long = newValue }
     }
+    
+    public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        //isUpdating = true
+        let centre = mapView.centerCoordinate
+        lat = String(centre.latitude)
+        long = String(centre.longitude)
+    }
+    
 }
