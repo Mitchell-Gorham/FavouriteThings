@@ -23,6 +23,7 @@ extension Location: MKMapViewDelegate {
         get { long ?? "" }
         set { long = newValue }
     }
+    
     /*  Didn't get working smoothly
     public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         guard !self.isUpdating else {

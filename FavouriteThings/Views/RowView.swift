@@ -11,7 +11,6 @@ import SwiftUI
 struct RowView: View {
     @ObservedObject var faveRow: FaveClass
     var body: some View {
-        //
         HStack() {
             imageDownload(faveRow.url ?? "noImage")
                 .resizable()

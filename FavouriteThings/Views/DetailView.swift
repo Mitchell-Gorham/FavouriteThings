@@ -20,59 +20,41 @@ struct DetailView: View {
     var body: some View {
         ScrollView(.vertical) {
             VStack() {
+                //Image
                 imageDownload(fave.url ?? "noImage")
+                
+                //URL Textfield
                 TextField("Enter URL", text: $tempURL, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
                     self.fave.url = self.tempURL
                 }).textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width:UIScreen.main.bounds.width-25)
+                
+                //Name Textfield
                 TextField("Name", text: $fave.nameString, onEditingChanged: { _ in try? self.context.save() } )
                     .font(.largeTitle)
                     .multilineTextAlignment(.center)
                     .frame(width:UIScreen.main.bounds.width-25)
+                
+                //Subtitle Textfield
                 TextField("Subtitle", text: $fave.subString, onEditingChanged: { _ in try? self.context.save() } )
                     .multilineTextAlignment(.center)
                     .frame(width:UIScreen.main.bounds.width-25)
                     .foregroundColor(.gray)
+                
+                //Map Nav Link
                 HStack {
                     NavigationLink(destination: LocationView(location: fave.location ?? Location(context: context), tempName: fave.location?.name ?? "", tempLat: fave.location?.lat ?? "", tempLong: fave.location?.long ?? "")) {
                         Text("Location: \(self.fave.location?.name ?? "")")
                     }
                 }
             }
-            
             Spacer(minLength: 30)
+            
             VStack{
-                //ScrollView(.vertical){
-                    ForEach (0..<fave.nameArray.count, id: \.self) { item in
-                        DetailListView(faveList: self.fave, item: item)
-                    }
-                /*}.frame(minWidth:UIScreen.main.bounds.width-25,
-                        maxWidth:UIScreen.main.bounds.width-25,
-                        minHeight:80,
-                        maxHeight:80)*/
-                 /*     Bonus Flair that currently invites issues
-                 HStack {
-                    Button(
-                        action: {
-                            let newName = FieldNameArray(context: self.context)
-                            let newDesc = FieldDescArray(context: self.context)
-                            newName.parentClass = self.fave
-                            newDesc.parentClass = self.fave
-                            try? self.context.save()
-                        }
-                    ) { Image(systemName: "text.badge.plus") }
-                    Button(
-                       action: {
-                            if self.fave.nameArray.count > 0 {
-//MARK: Find out how to remove items from array
-                                //self.fave.nameArray.removeLast()
-                                //self.fave.descArray.removeLast()
-                                try? self.context.save()
-                            }
-                       }
-                    ) { Image(systemName: "text.badge.minus").foregroundColor(.red) }
+                //Detail Name:Descriptions
+                ForEach (0..<fave.nameArray.count, id: \.self) { item in
+                    DetailListView(faveList: self.fave, item: item)
                 }
-                */
                 Spacer(minLength: 30)
                 //Editable Text Field for Notes
                 Text("Notes:")
@@ -81,11 +63,6 @@ struct DetailView: View {
                 TextField("Add some notes here", text: $fave.notesString, onEditingChanged: { _ in try? self.context.save() } )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width:UIScreen.main.bounds.width-25)
-                
-                /*Rectangle()
-                    .fill(Color.red)
-                    .frame(width: CGFloat(self.keyboard.w), height: CGFloat(self.keyboard.h))
-                */
             }.frame(width:UIScreen.main.bounds.width-25)
             
         }.frame(width:UIScreen.main.bounds.width-25)

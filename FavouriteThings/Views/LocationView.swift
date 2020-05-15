@@ -23,6 +23,8 @@ struct LocationView: View {
             MapView(location: location)
                 .frame(width:UIScreen.main.bounds.width,
                        height: UIScreen.main.bounds.height/3)
+            
+            //Name Text Field
             HStack {
                 Text("Location Name:")
                 TextField("Enter Location Name", text: self.$tempName, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
@@ -46,6 +48,8 @@ struct LocationView: View {
                     
                 })
             }
+            
+            //Latitude Text Field
             HStack {
                 Text("Latitude:")
                 TextField("Location Name", text: self.$tempLat, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
@@ -69,6 +73,8 @@ struct LocationView: View {
                         self.location.long = String(self.currentPosition.longitude)
                     })
                 }
+            
+            //Longitude Text Field
             HStack {
                 Text("Longitude:")
                 TextField("Location Name", text: self.$tempLong, onEditingChanged: { _ in try? self.context.save() }, onCommit: {
@@ -92,6 +98,7 @@ struct LocationView: View {
                     self.location.long = String(self.currentPosition.longitude)
                 })
             }
-        }.offset(x:0,y:-UIScreen.main.bounds.height/4.2)
+            
+        }.offset(x:0,y:-UIScreen.main.bounds.height/4.2)    //Moves the whole screen up slightly to avoid keyboard issues
     }
 }
