@@ -11,7 +11,7 @@ import SwiftUI
 // Takes the received string and attempts to convert it into an image, should it fail to do so, a default image is provided
 
 func imageDownload (_ input: String) -> Image {
-    print(input)
+    //print(input)
     if input == "noImage" {
         return (Image("noImage"))
     }

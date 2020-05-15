@@ -114,6 +114,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FE43B6B0246E3D2C00731C02 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FE31F08224593E2D00C35166 /* FaveViewModelExtensions.swift */,
+				FE31F08424593E9300C35166 /* FaveClassExtensions.swift */,
+				FE31F08624593EB700C35166 /* FieldNameArrayExtensions.swift */,
+				FE31F08824593EC900C35166 /* FieldDescArrayExtensions.swift */,
+				FE63B928246B926100E9D6E4 /* LocationExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FE43B6B1246E3D4B00731C02 /* OldModel */ = {
+			isa = PBXGroup;
+			children = (
+				FED44B022448100A006A9DC8 /* FavouriteClass.swift */,
+				FED44B0424481023006A9DC8 /* FavouriteViewModel.swift */,
+			);
+			path = OldModel;
+			sourceTree = "<group>";
+		};
+		FE43B6B2246E3D7100731C02 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FED44ACE2447F8C8006A9DC8 /* ContentView.swift */,
+				FED44AFA2447FA51006A9DC8 /* MasterView.swift */,
+				FED44AFC24480015006A9DC8 /* RowView.swift */,
+				FED44AFE24480048006A9DC8 /* DetailView.swift */,
+				FEE0D8FA2457CD6600207ADB /* DetailListView.swift */,
+				FE0084FA246B81880051A73B /* LocationView.swift */,
+				FE63B92C246BB7E100E9D6E4 /* MapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FE43B6B3246E3D9D00731C02 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FED44ACA2447F8C8006A9DC8 /* AppDelegate.swift */,
+				FED44ACC2447F8C8006A9DC8 /* SceneDelegate.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		FED44ABE2447F8C8006A9DC8 = {
 			isa = PBXGroup;
 			children = (
@@ -138,26 +182,14 @@
 		FED44AC92447F8C8006A9DC8 /* FavouriteThings */ = {
 			isa = PBXGroup;
 			children = (
-				FED44ACA2447F8C8006A9DC8 /* AppDelegate.swift */,
-				FED44ACC2447F8C8006A9DC8 /* SceneDelegate.swift */,
-				FED44ACE2447F8C8006A9DC8 /* ContentView.swift */,
-				FED44AFA2447FA51006A9DC8 /* MasterView.swift */,
-				FED44AFC24480015006A9DC8 /* RowView.swift */,
-				FED44AFE24480048006A9DC8 /* DetailView.swift */,
-				FEE0D8FA2457CD6600207ADB /* DetailListView.swift */,
-				FE0084FA246B81880051A73B /* LocationView.swift */,
-				FE63B92C246BB7E100E9D6E4 /* MapView.swift */,
+				FE43B6B3246E3D9D00731C02 /* Controllers */,
+				FE43B6B2246E3D7100731C02 /* Views */,
+				FE43B6B0246E3D2C00731C02 /* Extensions */,
+				FE169CF6244E979100BB0319 /* FavouriteThingsCoreData.xcdatamodeld */,
 				FED44B0024480110006A9DC8 /* ImageDownload.swift */,
 				FE63B92A246BB21000E9D6E4 /* KeyboardClass.swift */,
-				FE169CF6244E979100BB0319 /* FavouriteThingsCoreData.xcdatamodeld */,
-				FE31F08224593E2D00C35166 /* FaveViewModelExtensions.swift */,
-				FE31F08424593E9300C35166 /* FaveClassExtensions.swift */,
-				FE31F08624593EB700C35166 /* FieldNameArrayExtensions.swift */,
-				FE31F08824593EC900C35166 /* FieldDescArrayExtensions.swift */,
-				FE63B928246B926100E9D6E4 /* LocationExtensions.swift */,
 				FED44AD02447F8C9006A9DC8 /* Assets.xcassets */,
-				FED44B022448100A006A9DC8 /* FavouriteClass.swift */,
-				FED44B0424481023006A9DC8 /* FavouriteViewModel.swift */,
+				FE43B6B1246E3D4B00731C02 /* OldModel */,
 				FED44AD22447F8C9006A9DC8 /* Preview Content */,
 				FED44AD52447F8C9006A9DC8 /* LaunchScreen.storyboard */,
 				FED44AD82447F8C9006A9DC8 /* Info.plist */,

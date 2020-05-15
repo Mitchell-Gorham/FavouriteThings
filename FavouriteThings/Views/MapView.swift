@@ -15,10 +15,12 @@ struct MapView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
+        //mapView.delegate = location
         return mapView
     }
     
     func updateUIView(_ mapView: MKMapView, context: Context) {
+        //guard !location.isUpdating else { return }
         let latDouble = Double(self.location.latBind)
         let longDouble = Double(self.location.longBind)
         let target = CLLocationCoordinate2D(latitude: latDouble ?? 0, longitude: longDouble ?? 0)

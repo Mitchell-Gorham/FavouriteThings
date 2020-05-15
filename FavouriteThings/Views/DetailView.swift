@@ -34,7 +34,7 @@ struct DetailView: View {
                     .frame(width:UIScreen.main.bounds.width-25)
                     .foregroundColor(.gray)
                 HStack {
-                    NavigationLink(destination: LocationView(location: fave.location ?? Location(context: context))) {
+                    NavigationLink(destination: LocationView(location: fave.location ?? Location(context: context), tempName: fave.location?.name ?? "", tempLat: fave.location?.lat ?? "", tempLong: fave.location?.long ?? "")) {
                         Text("Location: \(self.fave.location?.name ?? "")")
                     }
                 }
@@ -64,8 +64,7 @@ struct DetailView: View {
                     Button(
                        action: {
                             if self.fave.nameArray.count > 0 {
-//MARK: Find out how to remove
-//      Items from the array
+//MARK: Find out how to remove items from array
                                 //self.fave.nameArray.removeLast()
                                 //self.fave.descArray.removeLast()
                                 try? self.context.save()
@@ -90,14 +89,6 @@ struct DetailView: View {
             }.frame(width:UIScreen.main.bounds.width-25)
             
         }.frame(width:UIScreen.main.bounds.width-25)
-         .offset(x:0,y:CGFloat(-keyboard.h))
+         .offset(x:0,y:CGFloat(-keyboard.h))    // Offsets view when keyboard is active to prevent edit fields from being covered
     }
 }
-
-//struct DetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailView(
-//            fave: FaveClass(url: "https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", name: "Google", sub: "Google Search", fieldNameArray: ["Origin","Lightning"], fieldDescArray: ["Web","Storm"] , notes: "Notes with Info")
-//        )
-//    }
-//}

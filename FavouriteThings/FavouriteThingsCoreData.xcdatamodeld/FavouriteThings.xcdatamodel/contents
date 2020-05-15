@@ -23,6 +23,7 @@
         <relationship name="parentClass" maxCount="1" deletionRule="Nullify" destinationEntity="FaveClass" inverseName="fieldNameArray" inverseEntity="FaveClass"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
+        <attribute name="isUpdating" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lat" attributeType="String" defaultValueString=""/>
         <attribute name="long" attributeType="String" defaultValueString=""/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
@@ -33,6 +34,6 @@
         <element name="FaveViewModel" positionX="-291.03125" positionY="-79.4296875" width="128" height="73"/>
         <element name="FieldDescArray" positionX="265.1015625" positionY="-138.88671875" width="128" height="73"/>
         <element name="FieldNameArray" positionX="265.4375" positionY="-63.13671875" width="128" height="73"/>
-        <element name="Location" positionX="259" positionY="12" width="128" height="103"/>
+        <element name="Location" positionX="259" positionY="12" width="128" height="118"/>
     </elements>
 </model>
